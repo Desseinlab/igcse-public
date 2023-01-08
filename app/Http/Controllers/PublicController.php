@@ -95,7 +95,9 @@ class PublicController extends Controller
                 $first_lecture = $chapter_one_lecture_one;
                 return redirect()->route('lecture', ['slug' => $first_lecture->slug])
                             ->with('error', 'At Starting You have to complete first chapter lecture one');
+
             }else {
+                return $result_data;
                 $result_lecture = Lecture::find($result_data->lecture_id);
                 if ($result_data->status == 0) {
                     $result_lecture = $chapter_one_lecture_one;
