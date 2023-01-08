@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SlugController;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +13,7 @@ use App\Models\MCQ;
 use App\Models\Result;
 use App\Models\Chapter;
 use Auth;
+use File;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller

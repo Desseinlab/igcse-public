@@ -10,7 +10,7 @@ use App\Models\SystemInfo;
 use App\Models\Contact_us;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use File;
 date_default_timezone_set("Asia/Dhaka");
 
 class SettingController extends Controller

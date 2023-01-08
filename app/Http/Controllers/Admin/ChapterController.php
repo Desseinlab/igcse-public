@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SlugController;
 use App\Models\Chapter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 class ChapterController extends Controller
 {

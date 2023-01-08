@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SlugController;
 use App\Models\Chapter;
 use App\Models\Lecture;
