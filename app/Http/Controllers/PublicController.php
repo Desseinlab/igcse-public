@@ -78,6 +78,7 @@ class PublicController extends Controller
         $chapter_one_lecture_one = Lecture::where('chapter_id', $chapter->id)->first();
         // return Lecture::where('id', '<', $lecture->id)->where('status', 1)->first();
         if((!Auth::check() || Auth::check()) && $lecture->chapter->id == $chapter->id && $chapter_one_lecture_one->id == $lecture->id){
+            // return "here";
             return view('website.pages.lecture',
                 [
                     'data' => Lecture::where('slug', $slug)->with('chapter')->first(),
@@ -97,7 +98,7 @@ class PublicController extends Controller
                             ->with('error', 'At Starting You have to complete first chapter lecture one');
 
             }else {
-                return $result_data;
+                // return $result_data;
                 $result_lecture = Lecture::find($result_data->lecture_id);
                 if ($result_data->status == 0) {
                     $result_lecture = $chapter_one_lecture_one;
