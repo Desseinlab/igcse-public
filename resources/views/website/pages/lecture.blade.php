@@ -16,6 +16,7 @@
                 <img class="card-img-top" src="{{ asset('storage/'.$data->file)}}" alt="Card image cap">
             @elseif ($data->cover_type == 3)
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="slider-counter" class="slider-counter text-center"></div>
                     <div class="carousel-inner owl-carousel">
                         @foreach ($data->ppt_images as $ppt_image)
                             
@@ -24,7 +25,6 @@
                             </div>
                         @endforeach
                     </div>
-                    <div id="counter"></div>
                 </div>
             @else
             <div class=" lecture-cover">
