@@ -9,7 +9,7 @@
 
 @section('contents')
 <!--Left part Start-->
-<div class="container" style="margin-top: 100px;">
+<div class="container" style="min-height: 1000px">
     <div class="row">
         <div class="col-12">
             @if ($data->cover_type == 2)
@@ -57,13 +57,14 @@
                 </span>
             </div>
             <hr>
-            <h2>{{ $data->title }}</h2>
-            <p class="lecture-content py-2 px-1">
-                {!! $data->description !!}
-            </p>
-            <hr>
-
-            <div class="row pagination-section">
+            <div class="lecture-content">
+                <h2 style="text-align: center">{{ $data->title }}</h2>
+                <p class="py-2 px-1">
+                    {!! $data->description !!}
+                </p>
+            </div>
+            
+            <div class="row pagination-section" style="margin-top: 10px">
                 <div class="col-4">
                     <a href="{{ empty($previous) ? '' : route('lecture', ['slug' => $previous->slug]) }}" class="{{empty($previous) ? 'disabled-link' : '' }}" >Previous</a>
                 </div>
