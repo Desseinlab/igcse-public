@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use COM;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Response;
 
 class LectureController extends Controller
 {
@@ -94,7 +95,7 @@ class LectureController extends Controller
         
                     $file = $image;
                 }
-            }else {
+            }elseif($request->cover_type == 3) {
                 $ppApp = new COM("PowerPoint.Application");
                 $ppApp->Visible = True;
 
@@ -116,6 +117,25 @@ class LectureController extends Controller
 
                 $file = $FileName;
                 
+            }else {
+                if(request()->hasFile('file') ){
+
+                    // Get filename with the extension
+                    $filenameWithExt = $request->file('file')->getClientOriginalName();
+                    $filenameWithExt = str_replace(' ', '', $filenameWithExt);
+                    // Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $request->file('file')->getClientOriginalExtension();
+                    // Filename to store
+                    $pdf= 'lecture-cover/'.$slug.'.'.$extension;
+                    // Upload Image
+                    $path = $request->file('file')->storeAs('public', $pdf);
+                    // $resize = Image::make('storage/'.$image)->resize(360,200);
+                    // $resize->save();
+        
+                    $file = $pdf;
+                }
             }
 
             $data = New Lecture;
@@ -250,7 +270,7 @@ class LectureController extends Controller
         
                     $file = $image;
                 }
-            }else {
+            }elseif($request->cover_type == 3) {
                 
                 if(request()->hasFile('file')){
                     $ppApp = new COM("PowerPoint.Application");
@@ -273,6 +293,31 @@ class LectureController extends Controller
                     $ppApp = null;
     
                     $file = $FileName;
+                }
+            }else {
+                if(request()->hasFile('file') ){
+
+                    if($old_data->cover_type == 4){
+                        if(File::exists('storage/'.$request->old_file)) {
+                            unlink('storage/'.$request->old_file);
+                        }
+                    }
+
+                    // Get filename with the extension
+                    $filenameWithExt = $request->file('file')->getClientOriginalName();
+                    $filenameWithExt = str_replace(' ', '', $filenameWithExt);
+                    // Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $request->file('file')->getClientOriginalExtension();
+                    // Filename to store
+                    $pdf= 'lecture-cover/'.$slug.'.'.$extension;
+                    // Upload Image
+                    $path = $request->file('file')->storeAs('public', $pdf);
+                    // $resize = Image::make('storage/'.$image)->resize(360,200);
+                    // $resize->save();
+        
+                    $file = $pdf;
                 }
             }
 
@@ -356,5 +401,17 @@ class LectureController extends Controller
         }
         $row->save();
         return redirect()->back()->with('success', 'Data Updated successfully!');
+    }
+
+    public function pdf_view($id)
+    {
+        $data = Lecture::find($id);
+
+        $path = public_path('storage/'.$data->file);
+        $name = str_replace(' ', '-', $data->title).'.pdf';
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$name.'"'
+        ]);
     }
 }

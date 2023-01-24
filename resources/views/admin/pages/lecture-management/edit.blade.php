@@ -90,6 +90,9 @@
                                                 <input 
                                                     type="radio" 
                                                     name="cover_type" value="3" id="slider" {{ $data->cover_type == 3 ? 'checked' : '' }}><label for="slider">Slider</label>
+                                                <input 
+                                                    type="radio" 
+                                                    name="cover_type" value="4" id="pdf" {{ $data->cover_type == 4 ? 'checked' : '' }}><label for="pdf">PDF</label>
                                             </div>
                                         </div>
                                     </div>
@@ -107,15 +110,29 @@
                                                 name="file" value="{{ $data->file }}" placeholder="Enter Video Link">
                                         </div>
                                     </div>
-                                    <div class="form-group not-video {{ $data->cover_type == 3 || $data->cover_type == 2 ? 'show' : 'hide' }}">
+                                    <div class="form-group not-video {{ $data->cover_type == 4 || $data->cover_type == 3 || $data->cover_type == 2 ? 'show' : 'hide' }}">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                               <span class="input-group-text" id="basic-addon5">File</span>
                                             </div>
+                                            @php
+                                                $accept_type = '';
+                                                if ($data->cover_type == 2){
+                                                    $accept_type = "image/*";
+                                                }elseif ($data->cover_type == 3) {
+                                                    $accept_type = "pps,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                                                }elseif ($data->cover_type == 4) {
+                                                    $accept_type = "application/pdf";
+                                                }
+                                            @endphp
                                             <input 
                                                 type="file" 
-                                                class="form-control {{($errors->first('file') ? "border border-danger" : "")}}" 
-                                                name="file">
+                                                class="form-control {{($errors->first('file') ? "border border-danger" : "")}} file-input" 
+                                                name="file"
+                                                accept="{{ $accept_type }}">
+                                            <div class="border border-dark d-flex justify-content-center align-items-center">
+                                                <a href="{{ route($url_group.'.lecture.pdf-view', $data->id) }}" target="_blank" rel="noopener noreferrer" title="Old Pdf file"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,6 +199,13 @@
                 $('.not-video').addClass('hide');
             }
             else{
+                if (val == 2) {
+                    $('.file-input').attr("accept", "image/*");
+                }else if(val == 3){
+                    $('.file-input').attr("accept", "pps,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation");
+                }else if(val == 4){
+                    $('.file-input').attr("accept", "application/pdf");
+                }
                 $('.not-video').removeClass('hide');
                 $('.not-video').addClass('show');
                 $('.video').removeClass('show');

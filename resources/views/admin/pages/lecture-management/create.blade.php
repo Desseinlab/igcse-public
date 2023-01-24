@@ -89,6 +89,9 @@
                                                 <input 
                                                     type="radio" 
                                                     name="cover_type" value="3" id="slider"><label for="slider">Slider</label>
+                                                <input 
+                                                    type="radio" 
+                                                    name="cover_type" value="4" id="pdf"><label for="pdf">PDF</label>
                                             </div>
                                         </div>
                                     </div>
@@ -112,7 +115,7 @@
                                             </div>
                                             <input 
                                                 type="file" 
-                                                class="form-control {{($errors->first('file') ? "border border-danger" : "")}}" 
+                                                class="form-control {{($errors->first('file') ? "border border-danger" : "")}} file-input" 
                                                 name="file" value="{{ old('file') }}">
                                         </div>
                                     </div>
@@ -180,6 +183,13 @@
                 $('.not-video').addClass('hide');
             }
             else{
+                if (val == 2) {
+                    $('.file-input').attr("accept", "image/*");
+                }else if(val == 3){
+                    $('.file-input').attr("accept", "pps,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation");
+                }else if(val == 4){
+                    $('.file-input').attr("accept", "application/pdf");
+                }
                 $('.not-video').removeClass('hide');
                 $('.not-video').addClass('show');
                 $('.video').removeClass('show');

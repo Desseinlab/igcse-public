@@ -95,6 +95,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin']], fu
     Route::resource('lecture', 'Admin\LectureController');
     Route::get('lecture-list/{type}','Admin\LectureController@index')->name('lecture-list.index');
     Route::get('lecture/status-change/{id}','Admin\LectureController@status_change')->name('lecture.status.change');
+    Route::get('lecture/pdf-view/{id}','Admin\LectureController@pdf_view')->name('lecture.pdf-view');
     //-----------------------------LECTURE MANAGEMENT END-----------------------------
 
     //-----------------------------MCQ MANAGEMENT START----------------------------

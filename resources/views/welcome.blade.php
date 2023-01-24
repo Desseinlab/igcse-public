@@ -77,6 +77,8 @@
                         <img class="card-img-top" src="{{ asset('storage/'.$lectures[$i]->file)}}" alt="Card image cap">
                     @elseif ($lectures[$i]->cover_type == 3)
                         <img class="card-img-top" src="{{ asset('storage/'.$lectures[$i]->ppt_images[0]->file)}}" alt="Card image cap">
+                    @elseif ($lectures[$i]->cover_type == 4)
+                        <img class="card-img-top" src="{{ asset('pdf.png')}}" alt="Card image cap">
                     @else
                         @php
                             // $img = 'https://img.youtube.com/vi/';
@@ -111,8 +113,11 @@
                         <img class="card-img-top" src="{{ asset('storage/'.$lectures[$i]->file)}}" alt="Card image cap">
                     @elseif ($lectures[$i]->cover_type == 3)
                         <img class="card-img-top" src="{{ asset('storage/'.$lectures[$i]->ppt_images[0]->file)}}" alt="Card image cap">
+                    @elseif ($lectures[$i]->cover_type == 4)
+                        <img class="card-img-top" src="{{ asset('pdf.png')}}" alt="Card image cap">
                     @else
                         @php
+                            dd($lectures[$i]);
                             // $img = 'https://img.youtube.com/vi/';
                             // $pieces = explode('/', $item->link);
                             // $last_word = array_pop($pieces);
