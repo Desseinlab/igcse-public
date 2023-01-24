@@ -64,7 +64,7 @@
                 </p>
             </div>
             
-            <div class="row pagination-section" style="margin-top: 10px">
+            <div class="row pagination-section">
                 <div class="col-4">
                     <a href="{{ empty($previous) ? '' : route('lecture', ['slug' => $previous->slug]) }}" class="{{empty($previous) ? 'disabled-link' : '' }}" >Previous</a>
                 </div>
