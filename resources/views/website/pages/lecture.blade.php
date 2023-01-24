@@ -27,7 +27,7 @@
                     </div>
                 </div>
             @elseif ($data->cover_type == 4)
-                <iframe src="{{ asset('storage/'.$data->file)}}" title="{{ $data->title }}" height="100%" width="100%" />
+                <iframe src="{{ asset('storage/'.$data->file)}}" title="{{ $data->title }}" height="100%" width="100%"> </iframe>
             @else
             <div class=" lecture-cover">
                 @php
